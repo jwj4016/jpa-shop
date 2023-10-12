@@ -1,14 +1,16 @@
 package com.example.jpashop.domain;
 
 import jakarta.persistence.*;
+import lombok.Setter;
 
 @Entity
+@Setter
 public class Delivery {
     @Id @GeneratedValue
     @Column(name = "DELIVERY_ID")
     private Long id;
 
-    @OneToOne(mappedBy = "ORDER_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Order order;
 
     @Embedded

@@ -2,9 +2,11 @@ package com.example.jpashop.domain;
 
 import com.example.jpashop.domain.item.Item;
 import jakarta.persistence.*;
+import lombok.Setter;
 
 @Entity
 @Table(name = "ORDER_ITEM")
+@Setter
 public class OrderItem {
     @Id
     @GeneratedValue

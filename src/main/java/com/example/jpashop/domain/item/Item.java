@@ -2,6 +2,8 @@ package com.example.jpashop.domain.item;
 
 import com.example.jpashop.domain.Category;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
 @Table(name = "ITEM")
 @DiscriminatorColumn(name = "DTYPE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Getter
+@Setter
 public class Item {
     @Id
     @GeneratedValue
@@ -28,4 +32,17 @@ public class Item {
         category.addItemToCategory(this);
     }
 
+    //==비지니스 로직==//
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    public void removeStock(int quantity) {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new RuntimeException();
+            //throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
+    }
 }

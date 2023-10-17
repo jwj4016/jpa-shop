@@ -2,11 +2,13 @@ package com.example.jpashop.domain;
 
 import com.example.jpashop.domain.item.Item;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "ORDER_ITEM")
 @Setter
+@Getter
 public class OrderItem {
     @Id
     @GeneratedValue
@@ -24,4 +26,24 @@ public class OrderItem {
     private int orderPrice;
     private int count;
 
+    //==생성 메소드==//
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    //==비지니스 로직==//
+    /** 주문 취소 */
+    public void cancel(){
+        getItem().addStock(count);
+    }
+
+    public int getTotalPrice() {
+        return getOrderPrice() * getCount();
+    }
 }

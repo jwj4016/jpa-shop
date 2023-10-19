@@ -19,4 +19,21 @@ spring:
     ansi:
       enabled: always
 
+  thymeleaf:
+    cache: false
+    #prefix:
+    check-template-location: true
+    encoding: utf-8
+    mode: HTML
+    suffix: .html
+
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+    remote:
+      restart:
+        enabled: true
+
 logging.level.org.hibernate.orm.jdbc.bind: trace

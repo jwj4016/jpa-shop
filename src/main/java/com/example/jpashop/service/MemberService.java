@@ -2,7 +2,10 @@ package com.example.jpashop.service;
 
 import com.example.jpashop.domain.Member;
 import com.example.jpashop.repository.MemberRepository;
+import com.example.jpashop.repository.MemberRepositoryWithSDJ;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final MemberRepositoryWithSDJ memberRepositoryWithSDJ;
 
     /**
      * 회원가입
@@ -42,6 +46,10 @@ public class MemberService {
      */
     public List<Member> findMembers() {
         return memberRepository.findAll();
+    }
+
+    public Page<Member> findMembers(Pageable pageable) {
+        return memberRepositoryWithSDJ.findAll(pageable);
     }
 
     public Member findOne(Long memberId) {

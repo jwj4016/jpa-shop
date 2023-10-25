@@ -11,6 +11,10 @@ import java.util.List;
 @Table(name = "MEMBER")
 @Getter
 @Setter
+@NamedQuery(
+        name = "Member.findByUsername"
+        , query = "select m from Member m where m.name = :username"
+)
 public class Member {
     @Id
     @GeneratedValue

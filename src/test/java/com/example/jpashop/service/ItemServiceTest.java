@@ -31,7 +31,7 @@ public class ItemServiceTest {
         Long savedId = itemService.saveItem(item);
 
         Item item1 = itemService.findOne(savedId);
-        Item item2 = itemRepository.findOne(savedId);
+        Item item2 = itemRepository.findById(savedId).get();
         //Then
         Assertions.assertEquals(item, item2);
     }

@@ -15,7 +15,7 @@ public class ItemService {
     private final ItemRepository itemRepository;
 
     public Long saveItem(Item item) {
-        return itemRepository.save(item);
+        return itemRepository.save(item).getId();
     }
 
     public List<Item> findItems() {
@@ -23,7 +23,7 @@ public class ItemService {
     }
 
     public Item findOne(Long itemId) {
-        return itemRepository.findOne(itemId);
+        return itemRepository.findById(itemId).get();
     }
 
 }

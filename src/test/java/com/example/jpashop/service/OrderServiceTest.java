@@ -38,7 +38,7 @@ public class OrderServiceTest {
         Long orderId = orderService.order(member.getId(), item.getId(), orderCount);
 
         //Then
-        Order getOrder = orderRepository.findOne(orderId);
+        Order getOrder = orderRepository.findById(orderId).get();
 
         //"상품 주문시 상태는 ORDER",
         Assertions.assertEquals(OrderStatus.ORDER, getOrder.getStatus());
@@ -78,7 +78,7 @@ public class OrderServiceTest {
         orderService.cancelOrder(orderId);
 
         //Then
-        Order getOrder = orderRepository.findOne(orderId);
+        Order getOrder = orderRepository.findById(orderId).get();
 
         Assertions.assertEquals(OrderStatus.CANCEL, getOrder.getStatus());
         Assertions.assertEquals(10, item.getStockQuantity());

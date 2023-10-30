@@ -2,7 +2,7 @@ package com.example.jpashop.service;
 
 import com.example.jpashop.domain.Member;
 import com.example.jpashop.repository.MemberRepository;
-import com.example.jpashop.repository.MemberRepositoryWithSDJ;
+import com.example.jpashop.repository.example.MemberRepositoryWithSDJ;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -53,6 +53,6 @@ public class MemberService {
     }
 
     public Member findOne(Long memberId) {
-        return memberRepository.findOne(memberId);
+        return memberRepository.findById(memberId).get();
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -43,15 +44,19 @@ public class OrderService {
      */
     public void cancelOrder(Long orderId) {
         //주문 엔티티 조회
-        Order order = orderRepository.findOne(orderId);
+        Optional<Order> orderOptional = orderRepository.findById(orderId);
         //주문 취소
-        order.cancel();
+        orderOptional.get().cancel();
     }
 
     /**
      * 주문 검색
      */
+    //리팩토링 전
+    //public List<Order> findOrders(OrderSearch orderSearch) {
+    //    return orderRepository.findAll(orderSearch);
+    //}
     public List<Order> findOrders(OrderSearch orderSearch) {
-        return orderRepository.findAll(orderSearch);
+        return orderRepository.findAll(orderSearch.toSpecification());
     }
 }

@@ -46,7 +46,7 @@ public class OrderService {
         //주문 엔티티 조회
         Optional<Order> orderOptional = orderRepository.findById(orderId);
         //주문 취소
-        orderOptional.get().cancel();
+        if (orderOptional.isPresent()) orderOptional.get().cancel();
     }
 
     /**
@@ -57,6 +57,7 @@ public class OrderService {
     //    return orderRepository.findAll(orderSearch);
     //}
     public List<Order> findOrders(OrderSearch orderSearch) {
-        return orderRepository.findAll(orderSearch.toSpecification());
+        //return orderRepository.findAll(orderSearch.toSpecification());
+        return orderRepository.search(orderSearch);
     }
 }

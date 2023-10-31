@@ -10,7 +10,7 @@ public class OrderSpec {
             @Override
             public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 
-                if (StringUtils.hasText(memberName)) {
+                if (!StringUtils.hasText(memberName)) {
                     return null;
                 }
 
